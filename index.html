@@ -208,7 +208,7 @@
     }
 
     .week-label.recovery::after {
-      content: ' (Recovery)';
+      content: ' (Regeneration)';
       font-size: 10px;
       font-weight: 600;
       color: #0369a1;
@@ -310,11 +310,12 @@
       display: flex;
       align-items: center;
       flex-shrink: 0;
+      padding: 4px;
     }
 
     input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
       cursor: pointer;
       accent-color: #4caf50;
     }
@@ -473,6 +474,11 @@
       .session-detail {
         font-size: 10px;
       }
+
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     @media (orientation: landscape) {
@@ -535,6 +541,11 @@
             { day: 'Di', type: 'Intervalle', duration: '5×800 m', detail: '@ 4:35/km · 2 Min Pause', hf: '180–188' },
             { day: 'Do', type: 'Tempo', duration: '18–20 Min', detail: '@ 5:15/km', hf: '162–172' },
             { day: 'Sa', type: 'Langer Lauf', duration: '45–50 Min', detail: 'sehr locker', hf: '140–155' }
+          ],
+          recovery: [
+            { day: 'Mo', type: 'Easy', duration: '21–24 Min', detail: 'sehr locker, erholen', hf: '125–135' },
+            { day: 'Mi', type: 'Easy', duration: '20–22 Min', detail: 'lockerer Lauf', hf: '125–135' },
+            { day: 'Sa', type: 'Langer Lauf', duration: '30–32 Min', detail: 'Grundlage, sehr locker', hf: '130–140' }
           ]
         },
         {
@@ -548,6 +559,11 @@
             { day: 'Di', type: 'Intervalle', duration: '5×1000 m', detail: '@ 4:35/km · 2,5 Min Pause', hf: '180–188' },
             { day: 'Do', type: 'Tempo', duration: '22–25 Min', detail: '@ 5:12/km', hf: '162–174' },
             { day: 'Sa', type: 'Langer Lauf', duration: '50–55 Min', detail: 'Grundlage', hf: '140–155' }
+          ],
+          recovery: [
+            { day: 'Mo', type: 'Easy', duration: '22–24 Min', detail: 'sehr locker, erholen', hf: '130–140' },
+            { day: 'Mi', type: 'Easy', duration: '21–23 Min', detail: 'lockerer Lauf', hf: '130–140' },
+            { day: 'Sa', type: 'Langer Lauf', duration: '35–38 Min', detail: 'Grundlage, sehr locker', hf: '135–145' }
           ]
         },
         {
@@ -561,6 +577,11 @@
             { day: 'Di', type: 'Intervalle', duration: '4×1200 m', detail: '@ 4:40/km · 2,5 Min Pause', hf: '180–188' },
             { day: 'Do', type: 'Tempo', duration: '25–28 Min', detail: '@ 5:10/km', hf: '163–175' },
             { day: 'Sa', type: 'Langer Lauf', duration: '55–60 Min', detail: 'Umfang ist der Reiz', hf: '140–155' }
+          ],
+          recovery: [
+            { day: 'Mo', type: 'Easy', duration: '24–25 Min', detail: 'sehr locker, erholen', hf: '130–140' },
+            { day: 'Mi', type: 'Easy', duration: '23–24 Min', detail: 'lockerer Lauf', hf: '130–140' },
+            { day: 'Sa', type: 'Langer Lauf', duration: '38–42 Min', detail: 'Grundlage, sehr locker', hf: '135–145' }
           ]
         },
         {
@@ -574,6 +595,11 @@
             { day: 'Di', type: 'Intervalle', duration: '3×1500 m', detail: '@ 4:40/km · 3 Min Pause', hf: '180–188' },
             { day: 'Do', type: 'Tempo', duration: '28–30 Min', detail: '@ 5:05/km', hf: '163–175' },
             { day: 'Sa', type: 'Langer Lauf', duration: '60 Min', detail: 'locker', hf: '140–155' }
+          ],
+          recovery: [
+            { day: 'Mo', type: 'Easy', duration: '24–25 Min', detail: 'sehr locker, erholen', hf: '130–140' },
+            { day: 'Mi', type: 'Easy', duration: '23–24 Min', detail: 'lockerer Lauf', hf: '130–140' },
+            { day: 'Sa', type: 'Langer Lauf', duration: '42–45 Min', detail: 'Grundlage, sehr locker', hf: '135–145' }
           ],
           testSession: {
             day: 'Mi',
@@ -636,27 +662,19 @@
       return recoveryWeeks.includes(week);
     }
 
-    function getReducedSession(session) {
-      const reductions = {
-        'Easy': { duration: '21–24 Min', hf: '≤145' },
-        'Intervalle': { duration: '-30% Sets', hf: '≤145' },
-        'Tempo': { duration: '-30% Dauer', hf: '≤145' },
-        'Langer Lauf': { duration: '-30% Umfang', hf: '≤145' }
-      };
-      const reduced = reductions[session.type] || session;
-      return {
-        ...session,
-        duration: reduced.duration,
-        hf: reduced.hf,
-        isRecovery: true
-      };
+    function getSessionsForWeek(block, week) {
+      if (isRecoveryWeek(week)) {
+        return block.recovery;
+      }
+      return block.sessions;
     }
 
     function isWeekCompleted(block, week) {
       if (week === 16 && block.testSession) {
         return isCompleted(`${block.id}-w16-test`);
       }
-      return block.sessions.every(session => 
+      const sessions = getSessionsForWeek(block, week);
+      return sessions.every(session => 
         isCompleted(`${block.id}-w${week}-${session.day.toLowerCase()}`)
       );
     }
@@ -735,6 +753,7 @@
             // Normal Week
             const isRecovery = isRecoveryWeek(week);
             const weekCompleted = isWeekCompleted(block, week);
+            const sessions = getSessionsForWeek(block, week);
 
             const weekGroup = document.createElement('div');
             weekGroup.className = `week-group ${isRecovery ? 'recovery' : ''} ${weekCompleted ? 'completed' : ''}`;
@@ -754,8 +773,7 @@
             const sessionsInWeek = document.createElement('div');
             sessionsInWeek.className = 'sessions-in-week';
 
-            block.sessions.forEach(session => {
-              const displaySession = isRecovery ? getReducedSession(session) : session;
+            sessions.forEach(session => {
               const sessionId = `${block.id}-w${week}-${session.day.toLowerCase()}`;
               const completed = isCompleted(sessionId);
 
@@ -764,10 +782,10 @@
               row.innerHTML = `
                 <div class="session-day">${session.day}</div>
                 <div class="session-info">
-                  <div class="session-type">${displaySession.type}</div>
-                  <div class="session-detail">${displaySession.duration} – ${displaySession.detail}</div>
+                  <div class="session-type">${session.type}</div>
+                  <div class="session-detail">${session.duration} – ${session.detail}</div>
                 </div>
-                <div class="session-hf">HF ${displaySession.hf}</div>
+                <div class="session-hf">HF ${session.hf}</div>
                 <div class="checkbox-wrapper">
                   <input type="checkbox" data-id="${sessionId}" ${completed ? 'checked' : ''}>
                 </div>
@@ -800,7 +818,8 @@
             totalSessions += 1;
             if (isCompleted(`${block.id}-w16-test`)) completedCount += 1;
           } else {
-            block.sessions.forEach(session => {
+            const sessions = getSessionsForWeek(block, week);
+            sessions.forEach(session => {
               totalSessions += 1;
               const sessionId = `${block.id}-w${week}-${session.day.toLowerCase()}`;
               if (isCompleted(sessionId)) completedCount += 1;
