@@ -24,10 +24,6 @@
       --safe-area-bottom: env(safe-area-inset-bottom);
       --safe-area-left: env(safe-area-inset-left);
       --safe-area-right: env(safe-area-inset-right);
-      
-      --color-5k: #2c5f8a;
-      --color-10k: #1e6b5a;
-      --color-hm: #7b3a6b;
     }
 
     * { 
@@ -67,21 +63,21 @@
       background: #1a1a2e; 
       color: white; 
       border-radius: 12px;
-      padding: 16px 16px; 
+      padding: 14px 14px; 
       margin-bottom: 16px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     header .header-label {
       font-size: 10px;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       opacity: 0.7;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     header h1 {
-      font-size: 24px;
+      font-size: 22px;
       margin: 4px 0;
       letter-spacing: -0.5px;
       font-weight: 700;
@@ -90,60 +86,15 @@
     header p {
       font-size: 13px;
       opacity: 0.8;
-      margin: 4px 0;
     }
 
-    /* ──── STATS GRID ──── */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .stat-box {
-      background: white;
-      border-radius: 12px;
-      padding: 12px;
-      text-align: center;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    }
-
-    .stat-label {
-      font-size: 11px;
-      color: #999;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-    }
-
-    .stat-value {
-      font-size: 18px;
-      font-weight: 700;
-      color: #1a1a2e;
-    }
-
-    .stat-unit {
-      font-size: 11px;
-      color: #999;
-      margin-top: 2px;
-    }
-
-    /* ──── PROGRESS ──── */
+    /* ──── PROGRESS SECTION ──── */
     .progress-section {
       background: white;
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 12px;
       margin-bottom: 16px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    }
-
-    .progress-label {
-      font-size: 12px;
-      color: #666;
-      font-weight: 600;
-      margin-bottom: 6px;
     }
 
     .progress-bar {
@@ -152,6 +103,7 @@
       height: 10px; 
       overflow: hidden;
       box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+      margin-bottom: 8px;
     }
 
     .progress-fill { 
@@ -164,53 +116,23 @@
 
     .progress-text {
       font-size: 12px;
-      color: #999;
-      margin-top: 6px;
-      text-align: center;
-    }
-
-    /* ──── TRAININGSZONEN ──── */
-    .zones-section {
-      background: white;
-      border-radius: 12px;
-      padding: 12px;
-      margin-bottom: 16px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    }
-
-    .zones-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 10px;
-    }
-
-    .zones-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .zone-badge {
-      font-size: 11px;
+      color: #666;
       font-weight: 600;
-      padding: 8px;
-      border-radius: 8px;
       text-align: center;
-      line-height: 1.2;
     }
 
-    .zone-badge.locker { background: #d4e5f7; color: #2c5f8a; }
-    .zone-badge.grundlage { background: #d4f0e8; color: #1e6b5a; }
-    .zone-badge.tempo { background: #f0dce8; color: #7b3a6b; }
-    .zone-badge.intervall { background: #ffe8cc; color: #b8700b; }
-    .zone-badge.max { background: #ffc4c4; color: #c41e1e; }
+    .streak-info {
+      font-size: 11px;
+      color: #999;
+      text-align: center;
+      margin-top: 4px;
+    }
 
     /* ──── BLOCKS ──── */
     .block {
       background: white; 
-      border-radius: 12px; 
-      margin-bottom: 16px;
+      border-radius: 10px; 
+      margin-bottom: 18px;
       overflow: hidden;
       box-shadow: 0 1px 3px rgba(0,0,0,0.06); 
     }
@@ -229,9 +151,9 @@
     }
 
     .block-header h2 { 
-      font-size: 16px; 
+      font-size: 15px; 
       font-weight: 700;
-      line-height: 1.2;
+      line-height: 1.1;
       margin-bottom: 2px;
     }
 
@@ -244,93 +166,240 @@
       font-size: 11px;
       opacity: 0.85;
       white-space: nowrap;
+      text-align: right;
     }
 
-    /* ──── TABELLE ──── */
-    .table-container {
-      overflow-x: auto;
+    /* ──── WEEKS CONTAINER ──── */
+    .weeks-container {
+      padding: 0;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    th {
-      background: #f9fafb;
-      padding: 10px 8px;
-      text-align: left;
-      font-weight: 600;
-      font-size: 11px;
-      color: #666;
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    td {
-      padding: 10px 8px;
+    .week-group {
+      padding: 12px;
       border-bottom: 1px solid #f3f4f6;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    td:last-child {
-      text-align: center;
+    .week-group:last-child {
+      border-bottom: none;
     }
 
-    .tag-column {
+    .week-group.recovery {
+      background: #f0f9ff;
+    }
+
+    .week-group.completed {
+      background: #f0fdf4;
+    }
+
+    .week-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .week-label {
+      font-size: 12px;
       font-weight: 700;
-      width: 28px;
-      text-align: center;
-      color: #1d4ed8;
+      color: #1a1a2e;
     }
 
-    .unit-column {
+    .week-label.recovery::after {
+      content: ' (Recovery)';
+      font-size: 10px;
       font-weight: 600;
-      flex: 1;
+      color: #0369a1;
     }
 
-    .detail-column {
-      font-size: 12px;
-      color: #666;
-      line-height: 1.3;
-    }
-
-    .hf-column {
-      font-size: 12px;
-      color: #666;
-      width: 50px;
-    }
-
-    .checkbox-cell {
-      width: 44px;
-    }
-
-    .week-badge {
-      display: inline-block;
-      background: #f3f4f6;
-      padding: 4px 8px;
-      border-radius: 6px;
+    .week-status {
       font-size: 11px;
       font-weight: 600;
-      color: #374151;
-      margin: 0 2px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #e5e7eb;
+      color: #666;
     }
 
-    .week-badge.recovery {
+    .week-status.completed {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    .week-status.recovery {
       background: #e0f2fe;
       color: #0369a1;
     }
 
-    .week-badge.test {
-      background: #fef3c7;
-      color: #92400e;
+    /* ──── SESSION IN WEEK ──── */
+    .sessions-in-week {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
-    /* Checkboxes */
+    .session-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px;
+      background: white;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .week-group.recovery .session-row {
+      background: #f8fdff;
+      border-color: #d4f0e8;
+    }
+
+    .week-group.completed .session-row {
+      background: #fafaf9;
+      border-color: #d4d4d8;
+    }
+
+    .session-row.done {
+      opacity: 0.6;
+    }
+
+    .session-day {
+      font-weight: 700;
+      font-size: 12px;
+      color: #1d4ed8;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .session-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .session-type {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .session-detail {
+      font-size: 11px;
+      color: #666;
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+
+    .session-hf {
+      font-size: 10px;
+      font-weight: 600;
+      color: #666;
+      background: #f3f4f6;
+      padding: 4px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .session-row.done .session-type {
+      text-decoration: line-through;
+      color: #999;
+    }
+
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
     input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       cursor: pointer;
       accent-color: #4caf50;
+    }
+
+    /* ──── TEST SESSION ──── */
+    .test-week-group {
+      padding: 14px;
+      background: #1a1a2e;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .test-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .test-label {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .test-status {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #2d2d44;
+    }
+
+    .test-status.completed {
+      background: #fbbf24;
+      color: #1a1a1a;
+    }
+
+    .test-session-row {
+      background: #2d2d44;
+      border: 1px solid #3d3d54;
+      padding: 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .test-session-row.done {
+      opacity: 0.7;
+    }
+
+    .test-day {
+      font-weight: 700;
+      font-size: 12px;
+      color: #fbbf24;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .test-info {
+      flex: 1;
+    }
+
+    .test-type {
+      font-weight: 600;
+      font-size: 12px;
+      color: white;
+    }
+
+    .test-detail {
+      font-size: 11px;
+      color: #d1d5db;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    .test-hf {
+      font-size: 10px;
+      font-weight: 600;
+      color: #fbbf24;
+      background: transparent;
+      padding: 0;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     /* ──── BUTTON ──── */
@@ -338,20 +407,21 @@
       display: flex;
       gap: 8px;
       margin-top: 16px;
+      margin-bottom: 8px;
     }
 
     button {
       flex: 1;
-      padding: 12px 16px; 
+      padding: 10px 12px; 
       background: white;
       border: 1px solid #e5e7eb;
       border-radius: 8px; 
       font-weight: 600;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       -webkit-appearance: none;
       appearance: none;
-      min-height: 44px;
+      min-height: 40px;
       transition: background 0.2s, transform 0.1s;
       -webkit-user-select: none;
       user-select: none;
@@ -366,8 +436,8 @@
     .info-text {
       font-size: 11px;
       color: #999;
-      margin-top: 10px;
       text-align: center;
+      padding: 0 12px;
     }
 
     /* ──── RESPONSIVE ──── */
@@ -377,37 +447,31 @@
       }
 
       header {
-        padding: 12px 12px;
+        padding: 10px 10px;
       }
 
       header h1 {
-        font-size: 20px;
+        font-size: 19px;
       }
 
-      .stats-grid {
-        gap: 8px;
-        margin-bottom: 12px;
+      .week-group {
+        padding: 10px;
       }
 
-      .stat-value {
-        font-size: 16px;
+      .session-row {
+        padding: 6px;
       }
 
-      table {
-        font-size: 12px;
-      }
-
-      th, td {
-        padding: 8px 6px;
-      }
-
-      .detail-column {
+      .week-label {
         font-size: 11px;
       }
 
-      .zone-badge {
+      .session-type {
+        font-size: 11px;
+      }
+
+      .session-detail {
         font-size: 10px;
-        padding: 6px;
       }
     }
 
@@ -417,7 +481,7 @@
       }
 
       header {
-        padding: 12px;
+        padding: 10px 10px;
         margin-bottom: 12px;
       }
 
@@ -425,8 +489,8 @@
         font-size: 18px;
       }
 
-      .stats-grid {
-        margin-bottom: 12px;
+      .week-group {
+        padding: 10px;
       }
     }
   </style>
@@ -439,51 +503,20 @@
       <p id="plan-subtitle">16-Wochen-Programm · Interaktiver Tracker</p>
     </header>
 
-    <!-- Stats Grid -->
-    <div class="stats-grid">
-      <div class="stat-box">
-        <div class="stat-label">Aktuelle Zeit</div>
-        <div class="stat-value">~24:00</div>
-        <div class="stat-unit">min</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Akt. Pace</div>
-        <div class="stat-value">4:48</div>
-        <div class="stat-unit">/km</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">HFmax</div>
-        <div class="stat-value">198</div>
-        <div class="stat-unit">bpm</div>
-      </div>
-    </div>
-
     <!-- Progress -->
     <div class="progress-section">
-      <div class="progress-label">Dein Gesamtfortschritt</div>
       <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
       <div class="progress-text"><span id="progress-text">0 / 64 Einheiten (0%)</span></div>
-    </div>
-
-    <!-- Trainingszonen -->
-    <div class="zones-section">
-      <div class="zones-title">Trainingszonen</div>
-      <div class="zones-grid">
-        <div class="zone-badge locker"><strong>Locker</strong><br>119–139</div>
-        <div class="zone-badge grundlage"><strong>Grundlage</strong><br>139–158</div>
-        <div class="zone-badge tempo"><strong>Tempo</strong><br>158–178</div>
-        <div class="zone-badge intervall"><strong>Intervall</strong><br>178–188</div>
-        <div class="zone-badge max"><strong>Max</strong><br>188–198</div>
-      </div>
+      <div class="streak-info"><span id="streak-text">Kein Streak gestartet</span></div>
     </div>
 
     <!-- Blocks Container -->
     <div id="blocks-container"></div>
 
     <div class="button-group">
-      <button id="reset-btn">↺ Tracker zurücksetzen</button>
+      <button id="reset-btn">↺ Zurücksetzen</button>
     </div>
-    <div class="info-text">Dein Fortschritt wird automatisch gespeichert</div>
+    <div class="info-text">Fortschritt wird automatisch gespeichert</div>
   </div>
 
   <script>
@@ -498,10 +531,10 @@
           color: '#2c5f8a',
           weeks: [1, 2, 3, 4],
           sessions: [
-            { day: 'Mo', type: 'Easy Run', duration: '30 Min', detail: 'locker, konversationstauglich', hf: '130–138' },
-            { day: 'Mi', type: 'Intervalle', duration: '5 × 800 m', detail: '@ 4:35/km · 2 Min Pause', hf: '180–188' },
-            { day: 'Fr', type: 'Tempo-Dauerlauf', duration: '18–20 Min', detail: '@ 5:15/km', hf: '162–172' },
-            { day: 'So', type: 'Langer Lauf', duration: '45–50 Min', detail: 'sehr locker', hf: '140–155' }
+            { day: 'Mo', type: 'Easy', duration: '30 Min', detail: 'locker, konversationstauglich', hf: '130–138' },
+            { day: 'Di', type: 'Intervalle', duration: '5×800 m', detail: '@ 4:35/km · 2 Min Pause', hf: '180–188' },
+            { day: 'Do', type: 'Tempo', duration: '18–20 Min', detail: '@ 5:15/km', hf: '162–172' },
+            { day: 'Sa', type: 'Langer Lauf', duration: '45–50 Min', detail: 'sehr locker', hf: '140–155' }
           ]
         },
         {
@@ -511,10 +544,10 @@
           color: '#1e6b5a',
           weeks: [5, 6, 7, 8],
           sessions: [
-            { day: 'Mo', type: 'Easy Run', duration: '32–35 Min', detail: 'sehr locker halten', hf: '130–140' },
-            { day: 'Mi', type: 'Intervalle', duration: '5 × 1000 m', detail: '@ 4:35/km · 2,5 Min Pause', hf: '180–188' },
-            { day: 'Fr', type: 'Tempo-Dauerlauf', duration: '22–25 Min', detail: '@ 5:12/km', hf: '162–174' },
-            { day: 'So', type: 'Langer Lauf', duration: '50–55 Min', detail: 'Grundlage', hf: '140–155' }
+            { day: 'Mo', type: 'Easy', duration: '32–35 Min', detail: 'sehr locker halten', hf: '130–140' },
+            { day: 'Di', type: 'Intervalle', duration: '5×1000 m', detail: '@ 4:35/km · 2,5 Min Pause', hf: '180–188' },
+            { day: 'Do', type: 'Tempo', duration: '22–25 Min', detail: '@ 5:12/km', hf: '162–174' },
+            { day: 'Sa', type: 'Langer Lauf', duration: '50–55 Min', detail: 'Grundlage', hf: '140–155' }
           ]
         },
         {
@@ -524,24 +557,31 @@
           color: '#7b3a6b',
           weeks: [9, 10, 11, 12],
           sessions: [
-            { day: 'Mo', type: 'Easy Run', duration: '35 Min', detail: 'Erholung ermöglichen', hf: '130–140' },
-            { day: 'Mi', type: 'Intervalle', duration: '4 × 1200 m', detail: '@ 4:40/km · 2,5 Min Pause', hf: '180–188' },
-            { day: 'Fr', type: 'Tempo-Dauerlauf', duration: '25–28 Min', detail: '@ 5:10/km', hf: '163–175' },
-            { day: 'So', type: 'Langer Lauf', duration: '55–60 Min', detail: 'Umfang ist der Reiz', hf: '140–155' }
+            { day: 'Mo', type: 'Easy', duration: '35 Min', detail: 'Erholung ermöglichen', hf: '130–140' },
+            { day: 'Di', type: 'Intervalle', duration: '4×1200 m', detail: '@ 4:40/km · 2,5 Min Pause', hf: '180–188' },
+            { day: 'Do', type: 'Tempo', duration: '25–28 Min', detail: '@ 5:10/km', hf: '163–175' },
+            { day: 'Sa', type: 'Langer Lauf', duration: '55–60 Min', detail: 'Umfang ist der Reiz', hf: '140–155' }
           ]
         },
         {
           id: 'block4',
-          title: 'Test',
+          title: 'Test / Taper',
           focus: 'Alles zusammenführen',
           color: '#8a4a1e',
           weeks: [13, 14, 15, 16],
           sessions: [
-            { day: 'Mo', type: 'Easy Run', duration: '35 Min', detail: 'Grundlage erhalten', hf: '130–140' },
-            { day: 'Mi', type: 'Intervalle', duration: '3 × 1500 m', detail: '@ 4:40/km · 3 Min Pause', hf: '180–188' },
-            { day: 'Fr', type: 'Tempo-Dauerlauf', duration: '28–30 Min', detail: '@ 5:05/km', hf: '163–175' },
-            { day: 'So', type: 'Langer Lauf', duration: '60 Min', detail: 'locker', hf: '140–155' }
-          ]
+            { day: 'Mo', type: 'Easy', duration: '35 Min', detail: 'Grundlage erhalten', hf: '130–140' },
+            { day: 'Di', type: 'Intervalle', duration: '3×1500 m', detail: '@ 4:40/km · 3 Min Pause', hf: '180–188' },
+            { day: 'Do', type: 'Tempo', duration: '28–30 Min', detail: '@ 5:05/km', hf: '163–175' },
+            { day: 'Sa', type: 'Langer Lauf', duration: '60 Min', detail: 'locker', hf: '140–155' }
+          ],
+          testSession: {
+            day: 'Mi',
+            type: '5 km Test',
+            duration: '5 km',
+            detail: '2 Tage Ruhe davor · Bestleistung anstreben',
+            hf: 'bis 196'
+          }
         }
       ]
     };
@@ -581,6 +621,7 @@
       }
       saveState();
       updateProgress();
+      renderPlan();
     }
 
     function resetPlan() {
@@ -595,9 +636,35 @@
       return recoveryWeeks.includes(week);
     }
 
+    function getReducedSession(session) {
+      const reductions = {
+        'Easy': { duration: '21–24 Min', hf: '≤145' },
+        'Intervalle': { duration: '-30% Sets', hf: '≤145' },
+        'Tempo': { duration: '-30% Dauer', hf: '≤145' },
+        'Langer Lauf': { duration: '-30% Umfang', hf: '≤145' }
+      };
+      const reduced = reductions[session.type] || session;
+      return {
+        ...session,
+        duration: reduced.duration,
+        hf: reduced.hf,
+        isRecovery: true
+      };
+    }
+
+    function isWeekCompleted(block, week) {
+      if (week === 16 && block.testSession) {
+        return isCompleted(`${block.id}-w16-test`);
+      }
+      return block.sessions.every(session => 
+        isCompleted(`${block.id}-w${week}-${session.day.toLowerCase()}`)
+      );
+    }
+
     const blocksContainer = document.getElementById('blocks-container');
     const progressFill = document.getElementById('progress-fill');
     const progressText = document.getElementById('progress-text');
+    const streakText = document.getElementById('streak-text');
 
     function renderPlan() {
       blocksContainer.innerHTML = '';
@@ -622,82 +689,168 @@
         header.appendChild(headerWeeks);
         blockDiv.appendChild(header);
 
-        // Table
-        const tableContainer = document.createElement('div');
-        tableContainer.className = 'table-container';
-        const table = document.createElement('table');
+        // Weeks Container
+        const weeksContainer = document.createElement('div');
+        weeksContainer.className = 'weeks-container';
 
-        const thead = document.createElement('thead');
-        thead.innerHTML = '<tr><th>Tag</th><th>Einheit</th><th>HF</th><th>✓</th></tr>';
-        table.appendChild(thead);
-
-        const tbody = document.createElement('tbody');
         block.weeks.forEach(week => {
-          block.sessions.forEach(session => {
-            const isRecovery = isRecoveryWeek(week);
-            const sessionId = `${block.id}-w${week}-${session.day.toLowerCase()}`;
+          if (week === 16 && block.testSession) {
+            // Test Week - nur Testlauf
+            const testSession = block.testSession;
+            const sessionId = `${block.id}-w16-test`;
             const completed = isCompleted(sessionId);
 
-            const tr = document.createElement('tr');
-            
-            const dayCell = document.createElement('td');
-            dayCell.className = 'tag-column';
-            dayCell.textContent = session.day;
-            tr.appendChild(dayCell);
+            const testGroup = document.createElement('div');
+            testGroup.className = `test-week-group ${completed ? 'done' : ''}`;
 
-            const unitCell = document.createElement('td');
-            unitCell.innerHTML = `
-              <div class="unit-column">${session.type}</div>
-              <div class="detail-column">${session.duration} · ${session.detail}</div>
+            const testHeader = document.createElement('div');
+            testHeader.className = 'test-header';
+            testHeader.innerHTML = `
+              <div class="test-label">Woche 16 · Testlauf</div>
+              <div class="test-status ${completed ? 'completed' : ''}">${completed ? '✓ Erledigt' : 'Offen'}</div>
             `;
-            tr.appendChild(unitCell);
+            testGroup.appendChild(testHeader);
 
-            const hfCell = document.createElement('td');
-            hfCell.className = 'hf-column';
-            hfCell.textContent = session.hf;
-            tr.appendChild(hfCell);
+            const testRow = document.createElement('div');
+            testRow.className = `test-session-row ${completed ? 'done' : ''}`;
+            testRow.innerHTML = `
+              <div class="test-day">${testSession.day}</div>
+              <div class="test-info">
+                <div class="test-type">${testSession.type}</div>
+                <div class="test-detail">${testSession.duration} – ${testSession.detail}</div>
+              </div>
+              <div class="test-hf">HF ${testSession.hf}</div>
+              <div class="checkbox-wrapper">
+                <input type="checkbox" data-id="${sessionId}" ${completed ? 'checked' : ''}>
+              </div>
+            `;
+            testGroup.appendChild(testRow);
+            weeksContainer.appendChild(testGroup);
 
-            const checkCell = document.createElement('td');
-            checkCell.className = 'checkbox-cell';
-            const badge = document.createElement('div');
-            badge.className = `week-badge ${isRecovery ? 'recovery' : ''}`;
-            badge.innerHTML = `<input type="checkbox" data-id="${sessionId}" ${completed ? 'checked' : ''}> W${week}`;
-            checkCell.appendChild(badge);
-            tr.appendChild(checkCell);
+            // Event listener
+            testRow.querySelector('input').addEventListener('change', (e) => {
+              setCompleted(e.target.dataset.id, e.target.checked);
+            });
+          } else {
+            // Normal Week
+            const isRecovery = isRecoveryWeek(week);
+            const weekCompleted = isWeekCompleted(block, week);
 
-            tbody.appendChild(tr);
-          });
+            const weekGroup = document.createElement('div');
+            weekGroup.className = `week-group ${isRecovery ? 'recovery' : ''} ${weekCompleted ? 'completed' : ''}`;
+
+            const weekHeader = document.createElement('div');
+            weekHeader.className = 'week-header';
+            const label = document.createElement('div');
+            label.className = `week-label ${isRecovery ? 'recovery' : ''}`;
+            label.textContent = `Woche ${week}`;
+            const status = document.createElement('div');
+            status.className = `week-status ${isRecovery ? 'recovery' : ''} ${weekCompleted ? 'completed' : ''}`;
+            status.textContent = weekCompleted ? '✓ Erledigt' : 'In Arbeit';
+            weekHeader.appendChild(label);
+            weekHeader.appendChild(status);
+            weekGroup.appendChild(weekHeader);
+
+            const sessionsInWeek = document.createElement('div');
+            sessionsInWeek.className = 'sessions-in-week';
+
+            block.sessions.forEach(session => {
+              const displaySession = isRecovery ? getReducedSession(session) : session;
+              const sessionId = `${block.id}-w${week}-${session.day.toLowerCase()}`;
+              const completed = isCompleted(sessionId);
+
+              const row = document.createElement('div');
+              row.className = `session-row ${completed ? 'done' : ''}`;
+              row.innerHTML = `
+                <div class="session-day">${session.day}</div>
+                <div class="session-info">
+                  <div class="session-type">${displaySession.type}</div>
+                  <div class="session-detail">${displaySession.duration} – ${displaySession.detail}</div>
+                </div>
+                <div class="session-hf">HF ${displaySession.hf}</div>
+                <div class="checkbox-wrapper">
+                  <input type="checkbox" data-id="${sessionId}" ${completed ? 'checked' : ''}>
+                </div>
+              `;
+              sessionsInWeek.appendChild(row);
+
+              // Event listener
+              row.querySelector('input').addEventListener('change', (e) => {
+                setCompleted(e.target.dataset.id, e.target.checked);
+              });
+            });
+
+            weekGroup.appendChild(sessionsInWeek);
+            weeksContainer.appendChild(weekGroup);
+          }
         });
-        table.appendChild(tbody);
-        tableContainer.appendChild(table);
-        blockDiv.appendChild(tableContainer);
+
+        blockDiv.appendChild(weeksContainer);
         blocksContainer.appendChild(blockDiv);
-      });
-
-      // Event delegation
-      document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        cb.addEventListener('change', (e) => {
-          setCompleted(e.target.dataset.id, e.target.checked);
-        });
       });
     }
 
     function calculateProgress() {
       let totalSessions = 0;
+      let completedCount = 0;
+
       trainingPlan.blocks.forEach(block => {
         block.weeks.forEach(week => {
-          totalSessions += block.sessions.length;
+          if (week === 16 && block.testSession) {
+            totalSessions += 1;
+            if (isCompleted(`${block.id}-w16-test`)) completedCount += 1;
+          } else {
+            block.sessions.forEach(session => {
+              totalSessions += 1;
+              const sessionId = `${block.id}-w${week}-${session.day.toLowerCase()}`;
+              if (isCompleted(sessionId)) completedCount += 1;
+            });
+          }
         });
       });
-      const completedCount = Object.keys(state || {}).length;
+
       const percent = totalSessions ? Math.round((completedCount / totalSessions) * 100) : 0;
       return { completedCount, totalSessions, percent };
     }
 
+    function calculateStreak() {
+      let streak = 0;
+      const blocks = trainingPlan.blocks;
+      
+      for (const block of blocks) {
+        for (const week of block.weeks) {
+          if (isWeekCompleted(block, week)) {
+            streak++;
+          } else {
+            return streak;
+          }
+        }
+      }
+      return streak;
+    }
+
     function updateProgress() {
       const { completedCount, totalSessions, percent } = calculateProgress();
+      const streak = calculateStreak();
+      
       progressFill.style.width = percent + '%';
       progressText.textContent = `${completedCount} / ${totalSessions} Einheiten (${percent}%)`;
+      
+      if (streak === 0) {
+        streakText.textContent = 'Kein Streak gestartet – Starte jetzt! 🚀';
+      } else if (streak === 1) {
+        streakText.textContent = `🔥 1 Woche – Fantastisch!`;
+      } else if (streak < 4) {
+        streakText.textContent = `🔥 ${streak} Wochen – Super Einsatz!`;
+      } else if (streak < 8) {
+        streakText.textContent = `🔥 ${streak} Wochen – Beeindruckend!`;
+      } else if (streak < 12) {
+        streakText.textContent = `🔥 ${streak} Wochen – Unglaublich!`;
+      } else if (streak < 16) {
+        streakText.textContent = `🔥 ${streak} Wochen – Du bist unstoppbar! 💪`;
+      } else {
+        streakText.textContent = `🏆 Alle 16 Wochen geschafft! Herzlichen Glückwunsch! 🎉`;
+      }
     }
 
     document.getElementById('reset-btn').addEventListener('click', () => {
