@@ -3,23 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-  <title>5K Running Coach</title>
+  <title>Lauftraining Coach</title>
   
   <!-- Apple Meta Tags für iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="5K Coach">
+  <meta name="apple-mobile-web-app-title" content="Lauftraining">
   <meta name="theme-color" content="#1a1a2e">
   
   <!-- Weitere iOS Meta Tags -->
   <meta name="format-detection" content="telephone=no">
   <meta name="x-apple-disable-message-reformatting" content="true">
   
-  <!-- App-Icons für verschiedene Größen -->
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%231a1a2e'/><text x='90' y='105' font-size='80' text-anchor='middle' fill='%234caf50' font-weight='bold' font-family='system-ui'>5K</text></svg>">
-  
   <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a1a2e'/><text x='50' y='60' font-size='50' text-anchor='middle' fill='%234caf50' font-weight='bold' font-family='system-ui'>5K</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a1a2e'/><text x='50' y='65' font-size='50' font-weight='bold' text-anchor='middle' fill='white' font-family='system-ui'>🏃</text></svg>">
   
   <style>
     :root {
@@ -27,6 +24,10 @@
       --safe-area-bottom: env(safe-area-inset-bottom);
       --safe-area-left: env(safe-area-inset-left);
       --safe-area-right: env(safe-area-inset-right);
+      
+      --color-5k: #2c5f8a;
+      --color-10k: #1e6b5a;
+      --color-hm: #7b3a6b;
     }
 
     * { 
@@ -79,6 +80,38 @@
     header p {
       font-size: 15px;
       opacity: 0.9;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+
+    .tab-btn {
+      padding: 12px 20px;
+      background: #f3f4f6;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      transition: all 0.2s;
+      min-height: 44px;
+      min-width: 80px;
+    }
+
+    .tab-btn.active {
+      background: #1a1a2e;
+      color: white;
+      border-color: #1a1a2e;
+    }
+
+    .tab-btn:active {
+      transform: scale(0.95);
     }
 
     .progress-bar {
@@ -151,6 +184,15 @@
       border-bottom: none; 
     }
 
+    .session.recovery {
+      background: #f0f9ff;
+    }
+
+    .session.test-session {
+      background: #1a1a2e;
+      color: white;
+    }
+
     .day-tag {
       width: 44px; 
       flex-shrink: 0;
@@ -158,6 +200,10 @@
       font-size: 14px; 
       color: #1d4ed8;
       text-align: center;
+    }
+
+    .session.test-session .day-tag {
+      color: #fbbf24;
     }
 
     .session-info { 
@@ -180,6 +226,14 @@
       word-break: break-word;
     }
 
+    .session.test-session .session-detail {
+      color: #d1d5db;
+    }
+
+    .session.recovery .session-detail {
+      color: #0369a1;
+    }
+
     .session-hf { 
       font-size: 12px; 
       font-weight: 600; 
@@ -189,6 +243,16 @@
       border-radius: 6px; 
       white-space: nowrap;
       flex-shrink: 0;
+    }
+
+    .session.test-session .session-hf {
+      background: #2d2d44;
+      color: white;
+    }
+
+    .session.recovery .session-hf {
+      background: #e0f2fe;
+      color: #0369a1;
     }
 
     .checkbox-label {
@@ -208,8 +272,6 @@
       min-width: 44px;
       min-height: 44px;
       transition: background 0.2s, transform 0.1s;
-      -webkit-appearance: none;
-      appearance: none;
     }
 
     .checkbox-label:active {
@@ -229,6 +291,22 @@
       -webkit-appearance: checkbox;
     }
 
+    .session.test-session .checkbox-label {
+      background: #2d2d44;
+      color: white;
+    }
+
+    .session.recovery .checkbox-label {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
     button {
       padding: 12px 16px; 
       background: #f3f4f6; 
@@ -239,13 +317,10 @@
       cursor: pointer;
       -webkit-appearance: none;
       appearance: none;
-      width: 100%;
-      max-width: 100%;
       min-height: 44px;
       transition: background 0.2s, transform 0.1s;
       -webkit-user-select: none;
       user-select: none;
-      margin-top: 12px;
     }
 
     button:active {
@@ -253,27 +328,15 @@
       background: #e5e7eb;
     }
 
-    .recovery { 
-      background: #fef2f2; 
+    #reset-btn {
+      flex: 1;
     }
 
-    .test-session { 
-      background: #1a1a2e; 
-      color: white; 
-    }
-
-    .test-session .checkbox-label { 
-      background: #2d2d44; 
-      color: white; 
-    }
-
-    .test-session .session-hf {
-      background: #2d2d44;
-      color: white;
-    }
-
-    .test-session .day-tag {
-      color: white;
+    .info-text {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 8px;
+      text-align: center;
     }
 
     /* Orientierungswechsel Unterstützung */
@@ -294,6 +357,10 @@
       .session {
         padding: 12px 16px;
       }
+
+      .tabs {
+        margin-bottom: 16px;
+      }
     }
 
     /* Accessibility */
@@ -313,263 +380,505 @@
       .session {
         padding: 12px 16px;
       }
+      .tabs {
+        gap: 8px;
+      }
+      .tab-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        min-width: 70px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container" id="app">
+    <div class="tabs" id="tabs-container">
+      <button class="tab-btn active" data-plan="5k">5 km</button>
+      <button class="tab-btn" data-plan="10k">10 km</button>
+      <button class="tab-btn" data-plan="hm">Halbmarathon</button>
+    </div>
+
     <header>
       <div style="font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7;">Lauftraining</div>
-      <h1>5 km Trainingsplan</h1>
-      <p>16 Wochen · Interaktiver Tracker</p>
+      <h1 id="plan-title">5 km Trainingsplan</h1>
+      <p id="plan-subtitle">16 Wochen · Interaktiver Tracker</p>
       <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
       <div id="progress-text" style="font-size: 14px; font-weight: 600;">0% erledigt</div>
     </header>
+    
     <div id="blocks-container"></div>
-    <button id="reset-btn">↺ Fortschritt zurücksetzen</button>
+    
+    <div class="button-group">
+      <button id="reset-btn">↺ Zurücksetzen</button>
+    </div>
+    <div class="info-text">Dein Fortschritt wird automatisch gespeichert</div>
   </div>
 
   <script>
-    (function() {
-      // ─── Datenmodell ──────────────────────────────────
-      const plan = {
-        id: '5k-standard',
-        name: '5 km Trainingsplan',
+    // ──────────────────────────────────────────────────
+    // DATENMODELL: Alle drei Trainingspläne
+    // ──────────────────────────────────────────────────
+    const trainingPlans = {
+      '5k': {
+        title: '5 km Trainingsplan',
+        subtitle: '16 Wochen · Interaktiver Tracker',
         blocks: [
           {
-            id: 'block1', title: 'Einstieg', focus: 'Konsistenz aufbauen',
-            color: '#2c5f8a', weeks: [1,2,3,4],
+            id: 'block1',
+            title: 'Einstieg',
+            focus: 'Konsistenz aufbauen',
+            color: '#2c5f8a',
+            weeks: [1, 2, 3, 4],
             sessions: [
-              { day:'Mo', type:'easy', duration:'30 Min', detail:'locker, konversationstauglich', hf:'130–138' },
-              { day:'Mi', type:'interval', duration:'5×800 m', detail:'@ 4:35/km · 2 Min Pause', hf:'180–188' },
-              { day:'Fr', type:'tempo', duration:'18–20 Min', detail:'@ 5:15/km', hf:'162–172' },
-              { day:'So', type:'long', duration:'45–50 Min', detail:'sehr locker', hf:'140–155' }
-            ],
-            recoveryWeek: 4
+              { day: 'Mo', type: 'Easy', duration: '30 Min', detail: 'locker, konversationstauglich', hf: '130–138' },
+              { day: 'Mi', type: 'Intervalle', duration: '5×800 m', detail: '@ 4:35/km · 2 Min Pause', hf: '180–188' },
+              { day: 'Fr', type: 'Tempo', duration: '18–20 Min', detail: '@ 5:15/km', hf: '162–172' },
+              { day: 'So', type: 'Langer Lauf', duration: '45–50 Min', detail: 'sehr locker', hf: '140–155' }
+            ]
           },
           {
-            id: 'block2', title: 'Entwicklung', focus: 'Intervalle verlängern',
-            color: '#1e6b5a', weeks: [5,6,7,8],
+            id: 'block2',
+            title: 'Entwicklung',
+            focus: 'Intervalle verlängern',
+            color: '#1e6b5a',
+            weeks: [5, 6, 7, 8],
             sessions: [
-              { day:'Mo', type:'easy', duration:'32–35 Min', detail:'sehr locker halten', hf:'130–140' },
-              { day:'Mi', type:'interval', duration:'5×1000 m', detail:'@ 4:35/km · 2,5 Min Pause', hf:'180–188' },
-              { day:'Fr', type:'tempo', duration:'22–25 Min', detail:'@ 5:12/km', hf:'162–174' },
-              { day:'So', type:'long', duration:'50–55 Min', detail:'Grundlage', hf:'140–155' }
-            ],
-            recoveryWeek: 8
+              { day: 'Mo', type: 'Easy', duration: '32–35 Min', detail: 'sehr locker halten', hf: '130–140' },
+              { day: 'Mi', type: 'Intervalle', duration: '5×1000 m', detail: '@ 4:35/km · 2,5 Min Pause', hf: '180–188' },
+              { day: 'Fr', type: 'Tempo', duration: '22–25 Min', detail: '@ 5:12/km', hf: '162–174' },
+              { day: 'So', type: 'Langer Lauf', duration: '50–55 Min', detail: 'Grundlage', hf: '140–155' }
+            ]
           },
           {
-            id: 'block3', title: 'Intensität', focus: 'Schwelle verschieben',
-            color: '#7b3a6b', weeks: [9,10,11,12],
+            id: 'block3',
+            title: 'Intensität',
+            focus: 'Schwelle verschieben',
+            color: '#7b3a6b',
+            weeks: [9, 10, 11, 12],
             sessions: [
-              { day:'Mo', type:'easy', duration:'35 Min', detail:'Erholung ermöglichen', hf:'130–140' },
-              { day:'Mi', type:'interval', duration:'4×1200 m', detail:'@ 4:40/km · 2,5 Min Pause', hf:'180–188' },
-              { day:'Fr', type:'tempo', duration:'25–28 Min', detail:'@ 5:10/km', hf:'163–175' },
-              { day:'So', type:'long', duration:'55–60 Min', detail:'Umfang ist der Reiz', hf:'140–155' }
-            ],
-            recoveryWeek: 12
+              { day: 'Mo', type: 'Easy', duration: '35 Min', detail: 'Erholung ermöglichen', hf: '130–140' },
+              { day: 'Mi', type: 'Intervalle', duration: '4×1200 m', detail: '@ 4:40/km · 2,5 Min Pause', hf: '180–188' },
+              { day: 'Fr', type: 'Tempo', duration: '25–28 Min', detail: '@ 5:10/km', hf: '163–175' },
+              { day: 'So', type: 'Langer Lauf', duration: '55–60 Min', detail: 'Umfang ist der Reiz', hf: '140–155' }
+            ]
           },
           {
-            id: 'block4', title: 'Test / Taper', focus: 'Alles zusammenführen',
-            color: '#8a4a1e', weeks: [13,14,15,16],
+            id: 'block4',
+            title: 'Test / Taper',
+            focus: 'Alles zusammenführen',
+            color: '#8a4a1e',
+            weeks: [13, 14, 15, 16],
             sessions: [
-              { day:'Mo', type:'easy', duration:'35 Min', detail:'Grundlage erhalten', hf:'130–140' },
-              { day:'Mi', type:'interval', duration:'3×1500 m', detail:'@ 4:40/km · 3 Min Pause', hf:'180–188' },
-              { day:'Fr', type:'tempo', duration:'28–30 Min', detail:'@ 5:05/km', hf:'163–175' },
-              { day:'So', type:'long', duration:'60 Min', detail:'locker', hf:'140–155' }
+              { day: 'Mo', type: 'Easy', duration: '35 Min', detail: 'Grundlage erhalten', hf: '130–140' },
+              { day: 'Mi', type: 'Intervalle', duration: '3×1500 m', detail: '@ 4:40/km · 3 Min Pause', hf: '180–188' },
+              { day: 'Fr', type: 'Tempo', duration: '28–30 Min', detail: '@ 5:05/km', hf: '163–175' },
+              { day: 'So', type: 'Langer Lauf', duration: '60 Min', detail: 'locker', hf: '140–155' }
             ],
-            testWeek: 16,
             testSession: {
-              day:'Sa', type:'Testlauf', duration:'5 km',
-              detail:'2 Tage Ruhe davor · Bestleistung anstreben', hf:'bis 196'
+              day: 'Sa',
+              type: '5 km Test',
+              duration: '5 km',
+              detail: '2 Tage Ruhe davor · Bestleistung anstreben',
+              hf: 'bis 196'
             }
           }
         ]
+      },
+
+      '10k': {
+        title: '10 km Trainingsplan',
+        subtitle: '16 Wochen · Interaktiver Tracker',
+        blocks: [
+          {
+            id: 'block1',
+            title: 'Einstieg',
+            focus: 'Basis aufbauen',
+            color: '#2c5f8a',
+            weeks: [1, 2, 3, 4],
+            sessions: [
+              { day: 'Mo', type: 'Easy', duration: '35 Min', detail: 'locker, konversationstauglich', hf: '130–138' },
+              { day: 'Mi', type: 'Intervalle', duration: '6×800 m', detail: '@ 4:25/km · 90 s Pause', hf: '182–190' },
+              { day: 'Fr', type: 'Tempo', duration: '22–25 Min', detail: '@ 5:00/km', hf: '164–174' },
+              { day: 'So', type: 'Langer Lauf', duration: '55–60 Min', detail: 'sehr locker', hf: '140–155' }
+            ]
+          },
+          {
+            id: 'block2',
+            title: 'Entwicklung',
+            focus: 'Ausdauer steigern',
+            color: '#1e6b5a',
+            weeks: [5, 6, 7, 8],
+            sessions: [
+              { day: 'Mo', type: 'Easy', duration: '38–40 Min', detail: 'sehr locker halten', hf: '130–140' },
+              { day: 'Mi', type: 'Intervalle', duration: '5×1200 m', detail: '@ 4:25/km · 2 Min Pause', hf: '182–190' },
+              { day: 'Fr', type: 'Tempo', duration: '28–32 Min', detail: '@ 4:55/km', hf: '164–176' },
+              { day: 'So', type: 'Langer Lauf', duration: '60–65 Min', detail: 'Grundlage', hf: '140–155' }
+            ]
+          },
+          {
+            id: 'block3',
+            title: 'Intensität',
+            focus: 'Grenzbereich trainieren',
+            color: '#7b3a6b',
+            weeks: [9, 10, 11, 12],
+            sessions: [
+              { day: 'Mo', type: 'Easy', duration: '40 Min', detail: 'Erholung ermöglichen', hf: '130–140' },
+              { day: 'Mi', type: 'Intervalle', duration: '4×1500 m', detail: '@ 4:28/km · 2,5 Min Pause', hf: '182–190' },
+              { day: 'Fr', type: 'Tempo', duration: '32–36 Min', detail: '@ 4:52/km', hf: '165–177' },
+              { day: 'So', type: 'Langer Lauf', duration: '65–75 Min', detail: 'Umfang ist der Reiz', hf: '140–155' }
+            ]
+          },
+          {
+            id: 'block4',
+            title: 'Test / Taper',
+            focus: 'Peak Performance',
+            color: '#8a4a1e',
+            weeks: [13, 14, 15, 16],
+            sessions: [
+              { day: 'Mo', type: 'Easy', duration: '40 Min', detail: 'Grundlage erhalten', hf: '130–140' },
+              { day: 'Mi', type: 'Intervalle', duration: '3×2000 m', detail: '@ 4:30/km · 3 Min Pause', hf: '182–190' },
+              { day: 'Fr', type: 'Tempo', duration: '35–38 Min', detail: '@ 4:48/km', hf: '165–177' },
+              { day: 'So', type: 'Langer Lauf', duration: '75 Min', detail: 'locker', hf: '140–155' }
+            ],
+            testSession: {
+              day: 'Sa',
+              type: '10 km Test',
+              duration: '10 km',
+              detail: '2 Tage Ruhe davor · Bestleistung anstreben',
+              hf: 'bis 195'
+            }
+          }
+        ]
+      },
+
+      'hm': {
+        title: 'Halbmarathon Trainingsplan',
+        subtitle: '16 Wochen · Interaktiver Tracker',
+        blocks: [
+          {
+            id: 'block1',
+            title: 'Einstieg',
+            focus: 'Umfang aufbauen',
+            color: '#2c5f8a',
+            weeks: [1, 2, 3, 4],
+            sessions: [
+              { day: 'Mo', type: 'Easy', duration: '40 Min', detail: 'locker, konversationstauglich', hf: '130–138' },
+              { day: 'Mi', type: 'Intervalle', duration: '6×1000 m', detail: '@ 4:15/km · 2 Min Pause', hf: '184–192' },
+              { day: 'Fr', type: 'Tempo', duration: '26–30 Min', detail: '@ 4:45/km', hf: '166–176' },
+              { day: 'So', type: 'Langer Lauf', duration: '70–80 Min', detail: 'sehr locker', hf: '140–155' }
+            ]
+          },
+          {
+            id: 'block2',
+            title: 'Entwicklung',
+            focus: 'Long Runs verlängern',
+            color: '#1e6b5a',
+            weeks: [5, 6, 7, 8],
+            sessions: [
+              { day: 'Mo', type: 'Easy', duration: '42–45 Min', detail: 'sehr locker halten', hf: '130–140' },
+              { day: 'Mi', type: 'Intervalle', duration: '5×1500 m', detail: '@ 4:15/km · 2,5 Min Pause', hf: '184–192' },
+              { day: 'Fr', type: 'Tempo', duration: '32–36 Min', detail: '@ 4:40/km', hf: '166–178' },
+              { day: 'So', type: 'Langer Lauf', duration: '80–95 Min', detail: 'Grundlage', hf: '140–155' }
+            ]
+          },
+          {
+            id: 'block3',
+            title: 'Intensität',
+            focus: 'Schwelle trainieren',
+            color: '#7b3a6b',
+            weeks: [9, 10, 11, 12],
+            sessions: [
+              { day: 'Mo', type: 'Easy', duration: '45 Min', detail: 'Erholung ermöglichen', hf: '130–140' },
+              { day: 'Mi', type: 'Intervalle', duration: '4×2000 m', detail: '@ 4:18/km · 3 Min Pause', hf: '184–192' },
+              { day: 'Fr', type: 'Tempo', duration: '38–42 Min', detail: '@ 4:35/km', hf: '167–179' },
+              { day: 'So', type: 'Langer Lauf', duration: '95–110 Min', detail: 'Umfang ist der Reiz', hf: '140–155' }
+            ]
+          },
+          {
+            id: 'block4',
+            title: 'Test / Taper',
+            focus: 'Finale Vorbereitung',
+            color: '#8a4a1e',
+            weeks: [13, 14, 15, 16],
+            sessions: [
+              { day: 'Mo', type: 'Easy', duration: '45 Min', detail: 'Grundlage erhalten', hf: '130–140' },
+              { day: 'Mi', type: 'Intervalle', duration: '3×3000 m', detail: '@ 4:20/km · 3 Min Pause', hf: '184–192' },
+              { day: 'Fr', type: 'Tempo', duration: '42–45 Min', detail: '@ 4:30/km', hf: '167–179' },
+              { day: 'So', type: 'Langer Lauf', duration: '110 Min', detail: 'locker', hf: '140–155' }
+            ],
+            testSession: {
+              day: 'Sa',
+              type: 'Halbmarathon Test',
+              duration: '21,1 km',
+              detail: '2 Tage Ruhe davor · Bestleistung anstreben',
+              hf: 'bis 194'
+            }
+          }
+        ]
+      }
+    };
+
+    // ──────────────────────────────────────────────────
+    // STATE MANAGEMENT
+    // ──────────────────────────────────────────────────
+    let currentPlan = '5k';
+    let state = {}; // { planProgress_5k: {...}, planProgress_10k: {...}, ... }
+
+    function getStorageKey(plan) {
+      return `planProgress_${plan}`;
+    }
+
+    function loadState() {
+      try {
+        const keys = ['5k', '10k', 'hm'];
+        keys.forEach(plan => {
+          const raw = localStorage.getItem(getStorageKey(plan));
+          state[plan] = raw ? JSON.parse(raw) : {};
+        });
+      } catch (e) {
+        state = { '5k': {}, '10k': {}, 'hm': {} };
+      }
+    }
+
+    function saveState(plan) {
+      try {
+        localStorage.setItem(getStorageKey(plan), JSON.stringify(state[plan]));
+      } catch (e) {
+        console.error('Storage error:', e);
+      }
+    }
+
+    function isCompleted(plan, sessionId) {
+      return Boolean(state[plan] && state[plan][sessionId]);
+    }
+
+    function setCompleted(plan, sessionId, completed) {
+      if (!state[plan]) state[plan] = {};
+      if (completed) {
+        state[plan][sessionId] = true;
+      } else {
+        delete state[plan][sessionId];
+      }
+      saveState(plan);
+      updateProgress(plan);
+    }
+
+    function resetPlan(plan) {
+      state[plan] = {};
+      saveState(plan);
+      renderPlan(plan);
+      updateProgress(plan);
+    }
+
+    // ──────────────────────────────────────────────────
+    // RECOVERY WEEK LOGIC
+    // ──────────────────────────────────────────────────
+    function isRecoveryWeek(week) {
+      const recoveryWeeks = [4, 8, 12];
+      return recoveryWeeks.includes(week);
+    }
+
+    function getReducedSession(session) {
+      // -30% Umfang für Recovery Wochen
+      const reductions = {
+        'Easy': { duration: '21–24 Min', hf: '≤145' },
+        'Intervalle': { duration: '-30% Sets', hf: '≤145' },
+        'Tempo': { duration: '-30% Dauer', hf: '≤145' },
+        'Langer Lauf': { duration: '-30% Umfang', hf: '≤145' }
       };
+      const reduced = reductions[session.type] || session;
+      return {
+        ...session,
+        duration: reduced.duration,
+        hf: reduced.hf,
+        isRecovery: true
+      };
+    }
 
-      // ─── State Management ────────────────────────────
-      const STORAGE_KEY = 'running-coach-progress';
-      let state = {};
+    // ──────────────────────────────────────────────────
+    // RENDERING
+    // ──────────────────────────────────────────────────
+    const blocksContainer = document.getElementById('blocks-container');
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    const planTitle = document.getElementById('plan-title');
+    const planSubtitle = document.getElementById('plan-subtitle');
 
-      function loadState() {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          state = raw ? JSON.parse(raw) : {};
-        } catch (e) {
-          state = {};
-        }
-      }
+    function renderPlan(plan) {
+      const planData = trainingPlans[plan];
+      planTitle.textContent = planData.title;
+      planSubtitle.textContent = planData.subtitle;
 
-      function saveState() {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        } catch (e) {
-          console.error('Storage error:', e);
-        }
-      }
+      blocksContainer.innerHTML = '';
+      planData.blocks.forEach(block => {
+        const blockDiv = document.createElement('div');
+        blockDiv.className = 'block';
 
-      function isCompleted(sessionId) {
-        return Boolean(state[sessionId]);
-      }
+        // Header
+        const header = document.createElement('div');
+        header.className = 'block-header';
+        header.style.background = block.color;
+        header.innerHTML = `
+          <div>
+            <h2>${block.title}</h2>
+            <div style="font-size:12px; opacity:0.8; margin-top:4px;">${block.focus}</div>
+          </div>
+          <div style="font-size:13px; opacity:0.8;">Wochen ${block.weeks[0]}–${block.weeks[block.weeks.length - 1]}</div>
+        `;
+        blockDiv.appendChild(header);
 
-      function setCompleted(sessionId, completed) {
-        if (completed) {
-          state[sessionId] = true;
-        } else {
-          delete state[sessionId];
-        }
-        saveState();
-        updateProgress();
-      }
+        // Sessions
+        const sessionsDiv = document.createElement('div');
+        sessionsDiv.className = 'sessions';
 
-      function resetAll() {
-        state = {};
-        saveState();
-        renderBlocks();
-        updateProgress();
-      }
+        block.weeks.forEach(week => {
+          const isTest = week === 16 && block.testSession;
 
-      // ─── Rendering ───────────────────────────────────
-      const blocksContainer = document.getElementById('blocks-container');
-      const progressFill = document.getElementById('progress-fill');
-      const progressText = document.getElementById('progress-text');
+          if (isTest) {
+            // Testwoche: nur Testlauf
+            const session = block.testSession;
+            const sessionId = `${block.id}-w${week}-test`;
+            const completed = isCompleted(plan, sessionId);
 
-      function renderBlocks() {
-        blocksContainer.innerHTML = '';
-        plan.blocks.forEach(block => {
-          const blockDiv = document.createElement('div');
-          blockDiv.className = 'block';
-
-          // Header
-          const header = document.createElement('div');
-          header.className = 'block-header';
-          header.style.background = block.color;
-          header.innerHTML = `
-            <div>
-              <h2>${block.title}</h2>
-              <div style="font-size:12px; opacity:0.8; margin-top:4px;">${block.focus}</div>
-            </div>
-            <div style="font-size:13px; opacity:0.8;">Wochen ${block.weeks[0]}–${block.weeks[block.weeks.length-1]}</div>
-          `;
-          blockDiv.appendChild(header);
-
-          // Sessions
-          const sessionsDiv = document.createElement('div');
-          sessionsDiv.className = 'sessions';
-
-          block.weeks.forEach(week => {
-            const isTest = (week === block.testWeek);
-
-            if (isTest && block.testSession) {
-              const session = block.testSession;
-              const sessionId = `${block.id}-w${week}-test`;
-              const completed = isCompleted(sessionId);
+            const row = document.createElement('div');
+            row.className = 'session test-session';
+            row.innerHTML = `
+              <div class="day-tag">${session.day}</div>
+              <div class="session-info">
+                <div class="session-type">${session.type} · Woche ${week}</div>
+                <div class="session-detail">${session.duration} – ${session.detail}</div>
+              </div>
+              <div class="session-hf">HF ${session.hf}</div>
+              <label class="checkbox-label">
+                <input type="checkbox" data-id="${sessionId}" data-plan="${plan}" ${completed ? 'checked' : ''} aria-label="Test erledigt">
+                <span>✓</span>
+              </label>
+            `;
+            sessionsDiv.appendChild(row);
+          } else {
+            // Normale oder Recovery Wochen
+            block.sessions.forEach(session => {
+              const isRecovery = isRecoveryWeek(week);
+              const displaySession = isRecovery ? getReducedSession(session) : session;
+              const sessionId = `${block.id}-w${week}-${session.day.toLowerCase()}`;
+              const completed = isCompleted(plan, sessionId);
 
               const row = document.createElement('div');
-              row.className = 'session test-session';
+              row.className = 'session' + (isRecovery ? ' recovery' : '');
+              
+              const recoveryLabel = isRecovery ? ' (Recovery)' : '';
               row.innerHTML = `
                 <div class="day-tag">${session.day}</div>
                 <div class="session-info">
-                  <div class="session-type">${session.type} · Woche ${week}</div>
-                  <div class="session-detail">${session.duration} – ${session.detail}</div>
+                  <div class="session-type">${displaySession.type} · Woche ${week}${recoveryLabel}</div>
+                  <div class="session-detail">${displaySession.duration} – ${displaySession.detail}</div>
                 </div>
-                <div class="session-hf">HF ${session.hf}</div>
+                <div class="session-hf">HF ${displaySession.hf}</div>
                 <label class="checkbox-label">
-                  <input type="checkbox" data-id="${sessionId}" ${completed ? 'checked' : ''} aria-label="Test erledigt">
-                  <span>Test</span>
+                  <input type="checkbox" data-id="${sessionId}" data-plan="${plan}" ${completed ? 'checked' : ''} aria-label="Einheit erledigt">
+                  <span>✓</span>
                 </label>
               `;
               sessionsDiv.appendChild(row);
-            } else {
-              // Normale Sessions
-              block.sessions.forEach(session => {
-                const sessionId = `${block.id}-w${week}-${session.day.toLowerCase()}`;
-                const completed = isCompleted(sessionId);
-
-                const row = document.createElement('div');
-                row.className = 'session';
-                row.innerHTML = `
-                  <div class="day-tag">${session.day}</div>
-                  <div class="session-info">
-                    <div class="session-type">${session.type} · Woche ${week}</div>
-                    <div class="session-detail">${session.duration} – ${session.detail}</div>
-                  </div>
-                  <div class="session-hf">HF ${session.hf}</div>
-                  <label class="checkbox-label">
-                    <input type="checkbox" data-id="${sessionId}" ${completed ? 'checked' : ''} aria-label="Einheit erledigt">
-                    <span>✓</span>
-                  </label>
-                `;
-                sessionsDiv.appendChild(row);
-              });
-            }
-          });
-
-          blockDiv.appendChild(sessionsDiv);
-          blocksContainer.appendChild(blockDiv);
+            });
+          }
         });
 
-        // Event delegation
-        document.querySelectorAll('input[data-id]').forEach(cb => {
-          cb.addEventListener('change', (e) => {
-            setCompleted(e.target.dataset.id, e.target.checked);
-          });
-        });
-      }
-
-      function updateProgress() {
-        let totalSessions = 0;
-        plan.blocks.forEach(block => {
-          block.weeks.forEach(week => {
-            if (week === block.testWeek && block.testSession) {
-              totalSessions += 1;
-            } else {
-              totalSessions += block.sessions.length;
-            }
-          });
-        });
-        const completedCount = Object.keys(state).length;
-        const percent = totalSessions ? Math.round((completedCount / totalSessions) * 100) : 0;
-
-        progressFill.style.width = percent + '%';
-        progressText.textContent = `${completedCount} / ${totalSessions} Einheiten · ${percent}%`;
-      }
-
-      // ─── Initialisierung ─────────────────────────────
-      loadState();
-      renderBlocks();
-      updateProgress();
-
-      document.getElementById('reset-btn').addEventListener('click', () => {
-        if (confirm('Gesamten Fortschritt auf null setzen?')) {
-          resetAll();
-        }
+        blockDiv.appendChild(sessionsDiv);
+        blocksContainer.appendChild(blockDiv);
       });
 
-      // Prevent zoom on double-tap
-      let lastTouchEnd = 0;
-      document.addEventListener('touchend', (e) => {
-        const now = Date.now();
-        if (now - lastTouchEnd <= 300) {
-          e.preventDefault();
-        }
-        lastTouchEnd = now;
-      }, false);
-
-      // ─── PWA Service Worker Registrierung ───────────
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('Service Worker registered'))
-            .catch(err => console.error('SW registration failed', err));
+      // Event delegation für Checkboxes
+      document.querySelectorAll('input[data-id]').forEach(cb => {
+        cb.addEventListener('change', (e) => {
+          const planId = e.target.dataset.plan;
+          setCompleted(planId, e.target.dataset.id, e.target.checked);
         });
-      }
+      });
+    }
 
-      // Statusbar Styling für iOS
-      if (navigator.standalone === true) {
-        document.body.style.paddingTop = 'var(--safe-area-top)';
+    function calculateProgress(plan) {
+      const planData = trainingPlans[plan];
+      let totalSessions = 0;
+
+      planData.blocks.forEach(block => {
+        block.weeks.forEach(week => {
+          if (week === 16 && block.testSession) {
+            totalSessions += 1; // Nur Testlauf
+          } else {
+            totalSessions += block.sessions.length; // 4 normale Sessions
+          }
+        });
+      });
+
+      const completedCount = Object.keys(state[plan] || {}).length;
+      const percent = totalSessions ? Math.round((completedCount / totalSessions) * 100) : 0;
+
+      return { completedCount, totalSessions, percent };
+    }
+
+    function updateProgress(plan) {
+      const { completedCount, totalSessions, percent } = calculateProgress(plan);
+      progressFill.style.width = percent + '%';
+      progressText.textContent = `${completedCount} / ${totalSessions} Einheiten · ${percent}%`;
+    }
+
+    // ──────────────────────────────────────────────────
+    // TAB SWITCHING
+    // ──────────────────────────────────────────────────
+    const tabsContainer = document.getElementById('tabs-container');
+    tabsContainer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('tab-btn')) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+        currentPlan = e.target.dataset.plan;
+        renderPlan(currentPlan);
+        updateProgress(currentPlan);
       }
-    })();
+    });
+
+    // ──────────────────────────────────────────────────
+    // RESET BUTTON
+    // ──────────────────────────────────────────────────
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      if (confirm(`Gesamten Fortschritt für ${trainingPlans[currentPlan].title} zurücksetzen?`)) {
+        resetPlan(currentPlan);
+      }
+    });
+
+    // ──────────────────────────────────────────────────
+    // INITIALIZATION
+    // ──────────────────────────────────────────────────
+    loadState();
+    renderPlan(currentPlan);
+    updateProgress(currentPlan);
+
+    // ──────────────────────────────────────────────────
+    // PWA: Service Worker Registration
+    // ──────────────────────────────────────────────────
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('Service Worker registered'))
+          .catch(err => console.error('SW registration failed', err));
+      });
+    }
+
+    // iOS Status Bar
+    if (navigator.standalone === true) {
+      document.body.style.paddingTop = 'var(--safe-area-top)';
+    }
+
+    // Prevent double-tap zoom
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (e) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
   </script>
 </body>
 </html>
