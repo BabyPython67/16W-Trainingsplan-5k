@@ -2,7 +2,7 @@
   "name": "5K Running Coach",
   "short_name": "5K Coach",
   "description": "16-Wochen Trainingsplan für 5 km Lauf",
-  "start_url": "/index.html",
+  "start_url": "/5k-training/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
